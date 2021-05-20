@@ -1,17 +1,19 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+tareas* leer_tareas_(int ruta_archivo);
+
 
  typedef struct{
         char* linea [100];
         int idTarea;
 
-    }lineas;
+    }tareas;
 
 int main(void)
 {
     char* ruta = "tareas.txt";
-    lineas  lineasLeidas;
+    tareas  tareasLeidas;
     //lineasLeidas = leer_tareas_archivo(ruta);
     
     char * buffer[1000];
@@ -29,20 +31,18 @@ int main(void)
      i++;
     } 
     printf("hay %d tareas \n",i);
-    lineas leerLineas[i];
+    tareas leerTarea[i];
     rewind(f); //ubico puntero en inicio de archivo
     i=0;
     //Leo hasta que llegue a 1000 caracteres o al final de linea
     while (fgets(buffer,1000,f) != NULL){
-        strcpy(leerLineas[i].linea, buffer); //guardo el buffer en el array
-        leerLineas[i].idTarea= i; 
+        strcpy(leerTarea[i].linea, buffer); //guardo el buffer en el array
+        leerTarea[i].idTarea= i; 
         i++;
     }
 	fclose(f);
     for(int j=0;j<i;j++){
-    printf("Tarea %d:%s \n",leerLineas[j].idTarea,leerLineas[j].linea);
+    printf("Tarea %d:%s \n",leerTarea[j].idTarea,leerTarea[j].linea);
     }
 }
-   leer_tareas_(ruta_archivo){
-
-   }
+ // tareas * leer_tareas_(ruta_archivo){ }
