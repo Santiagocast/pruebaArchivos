@@ -4,10 +4,10 @@
 
  typedef struct{
         char* linea [100];
-        int cantidadLineas;
+        int idTarea;
 
     }lineas;
-/*
+
 int main(void)
 {
     char* ruta = "tareas.txt";
@@ -15,7 +15,7 @@ int main(void)
     //lineasLeidas = leer_tareas_archivo(ruta);
     
     char * buffer[1000];
-    lineas leerLineas[10];
+    
     int i = 0;
 	//Abro el archivo
     FILE *f = fopen(ruta,"r");
@@ -23,20 +23,26 @@ int main(void)
 	printf("Error");//ERROR
 	else
     printf("abri el archivo \n");
-        
+
+    //Cuento las tareas para ver el tamaño del array
+    while (fgets(buffer,1000,f) != NULL){
+     i++;
+    } 
+    printf("hay %d tareas \n",i);
+    lineas leerLineas[i];
     rewind(f); //ubico puntero en inicio de archivo
+    i=0;
     //Leo hasta que llegue a 1000 caracteres o al final de linea
     while (fgets(buffer,1000,f) != NULL){
-        strcpy(leerLineas[i].linea, buffer); //guardo el buffer en el array 
+        strcpy(leerLineas[i].linea, buffer); //guardo el buffer en el array
+        leerLineas[i].idTarea= i; 
         i++;
     }
 	fclose(f);
-    
     for(int j=0;j<i;j++){
-    printf("contenido:%s \n",leerLineas[j].linea);
+    printf("Tarea %d:%s \n",leerLineas[j].idTarea,leerLineas[j].linea);
     }
 }
    leer_tareas_(ruta_archivo){
 
    }
-*/
