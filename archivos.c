@@ -2,59 +2,20 @@
 #include<stdlib.h>
 #include<string.h>
 
- typedef struct{
-        char* linea [100];
-        int idTarea;
-
-    }tareas;
-
-tareas* leer_tareas(int ruta_archivo);
+ char * leerTarea(int ruta,int linea);
 
 
 int main(void)
 {
     char* ruta = "tareas.txt";
-    //tareas* tareas  = leer_tareas_archivo(ruta);
-    
-    char * buffer[1000];
-    
-    int i = 0;
-	//Abro el archivo
-    FILE *f = fopen(ruta,"r");
-	if (f ==NULL)
-	printf("Error");//ERROR
-	else
-    printf("abri el archivo \n");
-
-    //Cuento las tareas para ver el tamaño del array
-    while (fgets(buffer,1000,f) != NULL){
-     i++;
-    } 
-    printf("hay %d tareas \n",i);
-    //Creo un array con las tareas
-    tareas tarea[i];
-    rewind(f); //ubico puntero en inicio de archivo
-    i=0;
-    //Leo hasta que llegue a 1000 caracteres o al final de linea
-    while (fgets(buffer,1000,f) != NULL){
-        strcpy(tarea[i].linea, buffer); //guardo el buffer en el array
-        tarea[i].idTarea= i; 
-        i++;
-    }
-	fclose(f);
-   
-    //Imprimo las tareas
-    for(int j=0;j<i;j++){
-    printf("Tarea %d:%s \n",tarea[j].idTarea,tarea[j].linea);
-    }
+    int linea = 0 ;
+    for(linea;linea<5;linea++)
+    printf("tarea: %s\n", leerTarea(ruta, linea));
 }
 
-/*
-  tareas * leer_tareas(ruta_archivo){ 
-
-    char * buffer[1000];
-    
-    int i = 0;
+ char * leerTarea(int ruta, int linea_buscada){
+    char * buffer[50];  //ver como hacer para ver cuanto ocupa el buffer 
+    int contador = 0;   
 	//Abro el archivo
     FILE *f = fopen(ruta,"r");
 	if (f ==NULL)
@@ -62,23 +23,13 @@ int main(void)
 	else
     printf("abri el archivo \n");
 
-    //Cuento las tareas para ver el tamaño del array
-    while (fgets(buffer,1000,f) != NULL){
-     i++;
+    while(contador<linea_buscada){ //me salteo las lineas y voy a la linea buscada
+        fgets(buffer,50,f);
+        contador++;
     } 
-    printf("hay %d tareas \n",i);
-    //Creo un array con las tareas
-    tareas tarea[i];
-    rewind(f); //ubico puntero en inicio de archivo
-    i=0;
-    //Leo hasta que llegue a 1000 caracteres o al final de linea
-    while (fgets(buffer,1000,f) != NULL){
-        strcpy(tarea[i].linea, buffer); //guardo el buffer en el array
-        tarea[i].idTarea= i; 
-        i++;
-    }
+    char* tarea = malloc(50);  //ver como hacer para ver cuanto ocupa el buffer 
+    fgets(buffer,50,f);//Leo hasta que llegue a 50 caracteres o al final de linea
+    strcpy(tarea, buffer); //guardo la tarea que me importa    
 	fclose(f);
-   
-    return tarea*;
-  }
-*/
+    return tarea;
+ }
